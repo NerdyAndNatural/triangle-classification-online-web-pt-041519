@@ -7,8 +7,7 @@ class Triangle
   end
 
   def kind
-    validate_triangle #runs this method
-    #returns what kind of triangle it is
+    validate_triangle 
     if a == b && b == c
       :equilateral
     elsif a == b || b == c || a == c
