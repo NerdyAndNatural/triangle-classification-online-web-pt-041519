@@ -1,29 +1,31 @@
 class Triangle
-  def initialize(side_1,side_2,side_3)
-    @side_1 = side_1
-    @side_2 = side_2
-    @side_3 = side_3
+  # write code here
+  attr_accessor :length1, :length2, :length3
+
+  def initialize(length1, length2, length3)
+    @length1 = length1
+    @length2 = length2
+    @length3 = length3
   end
 
-  def kind()
-    if (@side_1 <= 0) || (@side_2 <= 0) || (@side_3 <= 0)
-      raise TriangleError
-    elsif (@side_1+@side_2 <= @side_3) || (@side_1+@side_3 <= @side_2) || (@side_2+@side_3 <= @side_1)
-      raise TriangleError
-    else
-      if (@side_1 == @side_2) && (@side_2 == @side_3)
+    def kind
+      low, mid, max = [@length1, @length2, @length3].sort
+      if  low + mid <= max
+        raise TriangleError
+      elsif low == 0 || mid == 0 || max == 0
+        raise TriangleError
+      end
+
+      if @length1 == @length2 && @length2 == length3
         :equilateral
-      elsif (@side_1 == @side_2) || (@side_2 == @side_3) || (@side_1 == @side_3)
+      elsif @length1 == @length2 || @length1 == @length3 || @length2 == @length3
         :isosceles
-      elsif (@side_1 != @side_2) && (@side_2 != @side_3) && (@side_1 != @side_3)
+      else
         :scalene
       end
     end
 
-  end
+    class TriangleError < RangeError
+    end
 
 end
-
-class TriangleError < StandardError
-end
-
